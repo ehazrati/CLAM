@@ -103,7 +103,7 @@ class Dataset_All_Bags(Dataset):
 
 	def __getitem__(self, idx):
 		slide_id = self.df['slide_id'][idx]
-		return os.path.join(self.data_source, slide_id + '.h5')
+		return os.path.join(self.data_source, slide_id)
 
 
 

@@ -11,7 +11,7 @@ parser.add_argument('--seed', type=int, default=1,
                     help='random seed (default: 1)')
 parser.add_argument('--k', type=int, default=10,
                     help='number of splits (default: 10)')
-parser.add_argument('--task', type=str, choices=['camelyon_40x_cv', 'tcga_kidney_cv'])
+parser.add_argument('--task', type=str, choices=['camelyon_40x_cv', 'tcga_kidney_cv', 'clam_mp'])
 
 args = parser.parse_args()
 
@@ -42,6 +42,17 @@ elif args.task == 'camelyon_40x_cv':
     val_num = (31, 19)
     test_num = (31, 19)
 
+
+elif args.task == 'clam_mp':
+    dataset = Generic_WSI_Classification_Dataset(csv_path = 'dataset_csv/mamma_print_100.csv',
+                            shuffle = False, 
+                            seed = args.seed, 
+                            print_info = True,
+                            label_dict = {'LOW RISK':0, 'HIGH RISK':1},
+                            patient_strat=True,
+                            ignore=[])
+    val_num = (10, 5)
+    test_num = (10, 5)
 
 
 else:
